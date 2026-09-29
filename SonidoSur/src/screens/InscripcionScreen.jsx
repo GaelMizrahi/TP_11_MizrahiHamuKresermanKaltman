@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ScrollView,
   KeyboardAvoidingView,
@@ -9,17 +8,10 @@ import {
 
 import FormularioInscripcion from "../components/FormularioInscripcion";
 import TicketConfirmacion from "../components/TicketConfirmacion";
+import { useInscripcion } from "../context/InscripcionContext";
 
 export default function InscripcionScreen() {
-  const [inscripcion, setInscripcion] = useState(null);
-
-  const guardarInscripcion = (datos) => {
-    setInscripcion(datos);
-  };
-
-  const volverAInscribir = () => {
-    setInscripcion(null);
-  };
+  const { inscripcion } = useInscripcion();
 
   return (
     <KeyboardAvoidingView
@@ -32,14 +24,9 @@ export default function InscripcionScreen() {
       >
         <View style={styles.caja}>
           {inscripcion === null ? (
-            <FormularioInscripcion
-              onInscripcionConfirmada={guardarInscripcion}
-            />
+            <FormularioInscripcion />
           ) : (
-            <TicketConfirmacion
-              datos={inscripcion}
-              onVolverAInscribir={volverAInscribir}
-            />
+            <TicketConfirmacion />
           )}
         </View>
       </ScrollView>

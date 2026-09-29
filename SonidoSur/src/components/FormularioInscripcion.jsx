@@ -10,11 +10,12 @@ import { useForm, Controller } from "react-hook-form";
 
 import CampoFormulario from "./CampoFormulario";
 import SelectorEntrada from "./SelectorEntrada";
+import { useInscripcion } from "../context/InscripcionContext";
 
-export default function FormularioInscripcion({
-  onInscripcionConfirmada,
-}) {
+export default function FormularioInscripcion() {
   const [cargando, setCargando] = useState(false);
+
+  const { guardarInscripcion } = useInscripcion();
 
   const {
     control,
@@ -38,7 +39,7 @@ export default function FormularioInscripcion({
     setTimeout(() => {
       reset();
       setCargando(false);
-      onInscripcionConfirmada(datos);
+      guardarInscripcion(datos);
     }, 1000);
   };
 

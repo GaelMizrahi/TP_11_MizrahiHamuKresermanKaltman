@@ -1,9 +1,9 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useInscripcion } from "../context/InscripcionContext";
 
-export default function TicketConfirmacion({
-  datos,
-  onVolverAInscribir,
-}) {
+export default function TicketConfirmacion() {
+  const { inscripcion, volverAInscribir } = useInscripcion();
+
   return (
     <View style={styles.ticket}>
       <Text style={styles.marca}>SONIDO SUR</Text>
@@ -12,23 +12,23 @@ export default function TicketConfirmacion({
       <View style={styles.separador} />
 
       <Text style={styles.etiqueta}>Nombre completo</Text>
-      <Text style={styles.dato}>{datos.nombreCompleto}</Text>
+      <Text style={styles.dato}>{inscripcion.nombreCompleto}</Text>
 
       <Text style={styles.etiqueta}>Email</Text>
-      <Text style={styles.dato}>{datos.email}</Text>
+      <Text style={styles.dato}>{inscripcion.email}</Text>
 
       <Text style={styles.etiqueta}>Edad</Text>
-      <Text style={styles.dato}>{datos.edad}</Text>
+      <Text style={styles.dato}>{inscripcion.edad}</Text>
 
       <Text style={styles.etiqueta}>Tipo de entrada</Text>
       <Text style={styles.dato}>
-        {datos.tipoEntrada === "vip" ? "VIP" : "General"}
+        {inscripcion.tipoEntrada === "vip" ? "VIP" : "General"}
       </Text>
 
-      {datos.telefono !== "" && (
+      {inscripcion.telefono !== "" && (
         <>
           <Text style={styles.etiqueta}>Teléfono</Text>
-          <Text style={styles.dato}>{datos.telefono}</Text>
+          <Text style={styles.dato}>{inscripcion.telefono}</Text>
         </>
       )}
 
@@ -36,7 +36,7 @@ export default function TicketConfirmacion({
 
       <Pressable
         style={styles.boton}
-        onPress={onVolverAInscribir}
+        onPress={volverAInscribir}
       >
         <Text style={styles.textoBoton}>
           Volver a inscribir a otra persona
